@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>LinkLens Communication Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f0f2f5;
+        }
+        .header {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .test-section {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+        .log {
+            background: #000;
+            color: #00ff00;
+            padding: 15px;
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 14px;
+            height: 300px;
+            overflow-y: auto;
+            margin: 15px 0;
+        }
+        button {
+            background: #25D366;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            margin: 5px;
+        }
+        button:hover {
+            background: #128C7E;
+        }
+        .status {
+            padding: 10px;
+            border-radius: 6px;
+            margin: 10px 0;
+        }
+        .success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🔗 LinkLens Communication Test</h1>
+        <p>This page helps diagnose communication issues with the LinkLens extension.</p>
+    </div>
+    
+    <div class="test-section">
+        <h2>Communication Tests</h2>
+        <button onclick="testBackgroundConnection()">Test Background Connection</button>
+        <button onclick="testContentScript()">Test Content Script</button>
+        <button onclick="testFullFlow()">Test Full Flow</button>
+        <button onclick="clearLog()">Clear Log</button>
+        
+        <div id="status" class="status" style="display: none;"></div>
+        
+        <div class="log" id="log">
+            Communication test log will appear here...
+        </div>
+    </div>
+    
+    <div class="test-section">
+        <h2>Sample Links for Testing</h2>
+        <p>These links should be detected and analyzed by LinkLens:</p>
+        <ul>
+            <li><a href="https://google.com">https://google.com</a> (safe)</li>
+            <li><a href="https://github.com">https://github.com</a> (safe)</li>
+            <li><a href="http://suspicious-site.com/login">http://suspicious-site.com/login</a> (risky)</li>
+            <li><a href="http://fake-bank-login.com">http://fake-bank-login.com</a> (risky)</li>
+        </ul>
+    </div>
+    
+    <script>
+        const logElement = document.getElementById('log');
+        const statusElement = document.getElementById('status');
+        
+        function log(message) {
+            const timestamp = new Date().toISOString();
+            const logEntry = `[${timestamp}] ${message}`;
+            logElement.innerHTML += logEntry + '\n';
+            logElement.scrollTop = logElement.scrollHeight;
+            console.log(logEntry);
+        }
+        
+        function showStatus(message, isSuccess) {
+            statusElement.textContent = message;
+            statusElement.className = 'status ' + (isSuccess ? 'success' : 'error');
+            statusElement.style.display = 'block';
+            
+            // Hide after 3 seconds
+            setTimeout(() => {
+                statusElement.style.display = 'none';
+            }, 3000);
+        }
+        
+        function clearLog() {
+            logElement.innerHTML = 'Communication test log will appear here...\n';
+        }
+        
+        async function testBackgroundConnection() {
+            log('Testing background script connection...');
+            
+            try {
+                const response = await chrome.runtime.sendMessage({
+                    action: 'testConnection',
+                    timestamp: Date.now()
+                });
+                
+                log('✓ Background script responded: ' + JSON.stringify(response));
+                showStatus('Background connection test passed!', true);
+            } catch (error) {
+                log('✗ Error communicating with background script: ' + error.message);
+                showStatus('Background connection test failed: ' + error.message, false);
+            }
+        }
+        
+        async function testContentScript() {
+            log('Testing content script communication...');
+            
+            try {
+                // Get current tab
+                const tabs = await chrome.tabs.query({active: true, currentWindow: true});
+                const currentTab = tabs[0];
+                
+                if (!currentTab || !currentTab.id) {
+                    throw new Error('No active tab found');
+                }
+                
+                log('Current tab ID: ' + currentTab.id);
+                
+                // Send test message to content script
+                await chrome.tabs.sendMessage(currentTab.id, {
+                    action: 'testMessage',
+                    message: 'Hello from test page'
+                });
+                
+                log('✓ Test message sent to content script');
+                showStatus('Content script test passed!', true);
+            } catch (error) {
+                log('✗ Error sending message to content script: ' + error.message);
+                showStatus('Content script test failed: ' + error.message, false);
+            }
+        }
+        
+        async function testFullFlow() {
+            log('Testing full communication flow...');
+            
+            // This would simulate the actual flow
+            log('1. Content script detects link');
+            log('2. Content script sends URL to background');
+            log('3. Background calls API');
+            log('4. Background sends result back to content script');
+            log('5. Content script updates UI');
+            
+            showStatus('Full flow test completed (simulated)', true);
+        }
+        
+        // Add listener for messages from extension
+        chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+            log('Received message: ' + JSON.stringify(request));
+            
+            if (request.action === 'testResponse') {
+                log('Test response: ' + request.data);
+            }
+            
+            // Send response back for test messages
+            if (request.action === 'testConnection') {
+                sendResponse({
+                    status: 'connected',
+                    timestamp: Date.now(),
+                    message: 'Test page is running'
+                });
+            }
+        });
+        
+        // Initialize
+        log('LinkLens Communication Test Page Loaded');
+        log('Ready to run tests...');
+    </script>
+</body>
+</html>

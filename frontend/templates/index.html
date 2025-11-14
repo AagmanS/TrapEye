@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Phishing Detector</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🛡️ AI Phishing Detector</h1>
+            <p>Advanced ML-powered URL analysis for cybersecurity defense</p>
+        </header>
+
+        <div class="main-content">
+            <div class="input-section">
+                <div class="input-group">
+                    <label for="urlInput">Enter URL to analyze:</label>
+                    <input type="text" id="urlInput" placeholder="https://example.com or example.com" />
+                    <button id="analyzeBtn" onclick="analyzeURL()">🔍 Analyze URL</button>
+                </div>
+                
+                <div class="demo-section">
+                    <label>Safe Demo Mode:</label>
+                    <select id="demoSelect" onchange="runDemo()">
+                        <option value="">Select demo action...</option>
+                        <option value="local">Run Local Demo</option>
+                        <option value="synthetic">Run Synthetic Attack</option>
+                        <option value="phishing">Run PhishTank Sample</option>
+                        <option value="benign">Test Benign URL</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="loading" class="loading hidden">
+                <div class="spinner"></div>
+                <p>Analyzing URL features...</p>
+            </div>
+
+            <div id="result" class="result hidden">
+                <div class="result-card">
+                    <div class="score-section">
+                        <h3 id="resultLabel">Result</h3>
+                        <div class="score-bar">
+                            <div class="score-fill" id="scoreFill"></div>
+                        </div>
+                        <div class="score-text" id="scoreText">Score: 0.00</div>
+                    </div>
+                    
+                    <div class="reasons-section">
+                        <h4>Key Reasons:</h4>
+                        <ul id="reasonsList"></ul>
+                    </div>
+                    
+                    <div class="explainability-section">
+                        <h4>Feature Impact:</h4>
+                        <div id="explainabilityList"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-section">
+                <h3>How it works:</h3>
+                <ul>
+                    <li>🔍 Analyzes 17+ URL features including entropy, structure, and keywords</li>
+                    <li>🤖 Uses Machine Learning (Random Forest) for detection</li>
+                    <li>🛡️ Provides explainable AI with feature impact analysis</li>
+                    <li>⚡ Real-time analysis with < 1s response time</li>
+                </ul>
+                
+                <div class="ethical-notice">
+                    <strong>Ethical Use Only:</strong> This tool is for defensive cybersecurity purposes. 
+                    Do not use for creating phishing attacks or credential harvesting.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <audio id="alertSound" preload="auto">
+        <!-- We'll create a simple beep sound -->
+    </audio>
+
+    <script src="popup.js"></script>
+</body>
+</html>

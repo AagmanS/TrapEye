@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🛡️ AI Phishing Detector</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🛡️ AI Phishing Detector</h1>
+        <p>Advanced ML-powered URL analysis for cybersecurity defense</p>
+        
+        <div class="input-section">
+            <input type="text" id="urlInput" placeholder="Enter URL to analyze..." value="http://localhost:8000">
+            <button onclick="analyzeUrl()">🔍 Analyze URL</button>
+        </div>
+
+        <div class="demo-section">
+            <label>Safe Demo Mode:</label>
+            <select id="demoSelect" onchange="runDemo()">
+                <option value="">Select demo action...</option>
+                <option value="legitimate">Legitimate URL</option>
+                <option value="suspicious">Suspicious URL</option>
+                <option value="phishing">Phishing URL</option>
+            </select>
+        </div>
+
+        <div id="result" class="result-section" style="display: none;">
+            <h3>Result</h3>
+            <div class="score" id="scoreDisplay">Score: 0.00</div>
+            <div class="reasons" id="reasonsDisplay"></div>
+            <div class="features" id="featuresDisplay"></div>
+        </div>
+
+        <div class="info-section">
+            <h3>How it works:</h3>
+            <ul>
+                <li>🔍 Analyzes 17+ URL features including entropy, structure, and keywords</li>
+                <li>🤖 Uses Machine Learning (Random Forest) for detection</li>
+                <li>🛡️ Provides explainable AI with feature impact analysis</li>
+                <li>⚡ Real-time analysis with < 1s response time</li>
+            </ul>
+            <p class="warning">Ethical Use Only: This tool is for defensive cybersecurity purposes. Do not use for creating phishing attacks or credential harvesting.</p>
+        </div>
+    </div>
+
+    <script src="/static/popup.js"></script>
+</body>
+</html>

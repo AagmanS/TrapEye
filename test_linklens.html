@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>LinkLens for WhatsApp Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .message {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            background-color: #f9f9f9;
+        }
+        .message-in {
+            background-color: #ffffff;
+        }
+        .message-out {
+            background-color: #dcf8c6;
+        }
+        a {
+            color: #128C7E;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>LinkLens for WhatsApp Test Page</h1>
+    <p>This page simulates WhatsApp Web messages with links for testing the LinkLens extension.</p>
+    
+    <div class="message message-in">
+        <p>Hey, check out this cool website: <a href="https://google.com">https://google.com</a></p>
+        <p>Sent at 10:30 AM</p>
+    </div>
+    
+    <div class="message message-out">
+        <p>Thanks! I also found this interesting article: <a href="https://github.com">https://github.com</a></p>
+        <p>Sent at 10:32 AM</p>
+    </div>
+    
+    <div class="message message-in">
+        <p>Be careful with this link: <a href="http://suspicious-site.com/login">http://suspicious-site.com/login</a></p>
+        <p>Sent at 10:35 AM</p>
+    </div>
+    
+    <div class="message message-in">
+        <p>Here's another one: <a href="https://stackoverflow.com">https://stackoverflow.com</a></p>
+        <p>Sent at 10:40 AM</p>
+    </div>
+    
+    <div class="message message-out">
+        <p>And this one looks suspicious: <a href="http://fake-bank-login.com">http://fake-bank-login.com</a></p>
+        <p>Sent at 10:42 AM</p>
+    </div>
+</body>
+</html>

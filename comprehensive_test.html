@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Comprehensive LinkLens Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f0f2f5;
+        }
+        .header {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .message {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+        .message-in {
+            background-color: #ffffff;
+            border-left: 4px solid #25D366;
+        }
+        .message-out {
+            background-color: #dcf8c6;
+            border-left: 4px solid #128C7E;
+        }
+        a {
+            color: #128C7E;
+            text-decoration: none;
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+        a:hover {
+            text-decoration: underline;
+            background-color: rgba(18, 140, 126, 0.1);
+        }
+        .test-section {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+        .test-section h2 {
+            margin-top: 0;
+            color: #111b21;
+        }
+        .url-list {
+            background: #f0f2f5;
+            padding: 15px;
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 14px;
+        }
+        button {
+            background: #25D366;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            margin: 5px;
+        }
+        button:hover {
+            background: #128C7E;
+        }
+        .instructions {
+            background: #e8f4fc;
+            border-left: 4px solid #2196F3;
+            padding: 15px;
+            border-radius: 0 6px 6px 0;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🔗 LinkLens for WhatsApp - Comprehensive Test</h1>
+        <p>This page simulates WhatsApp Web messages with various types of links to test the LinkLens extension.</p>
+    </div>
+    
+    <div class="instructions">
+        <h3>📋 Testing Instructions:</h3>
+        <ol>
+            <li>Make sure the LinkLens extension is installed and enabled</li>
+            <li>Ensure the FastAPI backend is running on port 8002</li>
+            <li>Open this page in Chrome</li>
+            <li>Check the console (F12) for LinkLens messages</li>
+            <li>Verify that indicators appear next to links</li>
+            <li>Check that the floating panel shows analyzed links</li>
+        </ol>
+    </div>
+    
+    <div class="test-section">
+        <h2>✅ Safe Links Test</h2>
+        <div class="message message-in">
+            <p>Here are some safe websites:</p>
+            <p>• Google: <a href="https://google.com" data-testid="url">https://google.com</a></p>
+            <p>• GitHub: <a href="https://github.com" data-testid="url">https://github.com</a></p>
+            <p>• Stack Overflow: <a href="https://stackoverflow.com" data-testid="url">https://stackoverflow.com</a></p>
+            <p><small>Sent at 10:30 AM</small></p>
+        </div>
+    </div>
+    
+    <div class="test-section">
+        <h2>⚠️ Suspicious Links Test</h2>
+        <div class="message message-out">
+            <p>Be careful with these links:</p>
+            <p>• Suspicious site: <a href="http://suspicious-site.com/login" data-testid="url">http://suspicious-site.com/login</a></p>
+            <p>• Fake bank: <a href="http://fake-bank-login.com" data-testid="url">http://fake-bank-login.com</a></p>
+            <p>• Phishing attempt: <a href="http://paypal-security-update.com" data-testid="url">http://paypal-security-update.com</a></p>
+            <p><small>Sent at 10:35 AM</small></p>
+        </div>
+    </div>
+    
+    <div class="test-section">
+        <h2>🔄 Mixed Content Test</h2>
+        <div class="message message-in">
+            <p>Check out these links:</p>
+            <p>• Safe: <a href="https://microsoft.com" data-testid="url">https://microsoft.com</a></p>
+            <p>• Risky: <a href="http://bit.ly/suspicious-link" data-testid="url">http://bit.ly/suspicious-link</a></p>
+            <p>• Secure: <a href="https://amazon.com" data-testid="url">https://amazon.com</a></p>
+            <p>• Dangerous: <a href="http://free-iphone-giveaway.com" data-testid="url">http://free-iphone-giveaway.com</a></p>
+            <p><small>Sent at 10:40 AM</small></p>
+        </div>
+    </div>
+    
+    <div class="test-section">
+        <h2>🧪 Debugging Tools</h2>
+        <button onclick="forceScan()">Force Link Scan</button>
+        <button onclick="clearCache()">Clear Link Cache</button>
+        <button onclick="showPanel()">Show Analysis Panel</button>
+        
+        <div class="url-list">
+            <h3>Expected URLs for Testing:</h3>
+            <p>1. https://google.com (safe)</p>
+            <p>2. https://github.com (safe)</p>
+            <p>3. https://stackoverflow.com (safe)</p>
+            <p>4. http://suspicious-site.com/login (risky)</p>
+            <p>5. http://fake-bank-login.com (risky)</p>
+            <p>6. http://paypal-security-update.com (risky)</p>
+            <p>7. https://microsoft.com (safe)</p>
+            <p>8. http://bit.ly/suspicious-link (risky)</p>
+            <p>9. https://amazon.com (safe)</p>
+            <p>10. http://free-iphone-giveaway.com (risky)</p>
+        </div>
+    </div>
+    
+    <script>
+        // Debugging functions
+        function forceScan() {
+            console.log('Forcing link scan...');
+            // This would normally trigger the content script
+            alert('In a real WhatsApp Web environment, this would trigger a scan. Check console for LinkLens messages.');
+        }
+        
+        function clearCache() {
+            console.log('Clearing cache...');
+            // This would normally clear the extension's cache
+            alert('In a real extension environment, this would clear the cache. Refresh the page to see changes.');
+        }
+        
+        function showPanel() {
+            console.log('Showing analysis panel...');
+            // This would normally show the floating panel
+            alert('In a real extension environment, this would show the analysis panel.');
+        }
+    </script>
+</body>
+</html>
