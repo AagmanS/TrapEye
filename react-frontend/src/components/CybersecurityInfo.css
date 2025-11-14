@@ -1,0 +1,298 @@
+.cybersecurity-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.cybersecurity-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.cybersecurity-header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  background: linear-gradient(45deg, #6a89cc, #82ccdd);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.cybersecurity-header p {
+  font-size: 1.1rem;
+  color: #b0c4de;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.content-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  gap: 2rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.info-card {
+  background: rgba(30, 30, 50, 0.7);
+  padding: 2rem;
+  border-radius: 12px;
+  border: 1px solid rgba(100, 150, 255, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  backdrop-filter: blur(5px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.info-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px rgba(100, 150, 255, 0.3);
+  background: rgba(40, 40, 70, 0.8);
+}
+
+.info-card h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  color: #82ccdd;
+  border-bottom: 2px solid rgba(106, 137, 204, 0.5);
+  padding-bottom: 0.5rem;
+}
+
+.info-card p {
+  color: #b0c4de;
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+
+/* Laws Grid */
+.laws-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.law-item {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  background: rgba(20, 20, 35, 0.5);
+  border-radius: 8px;
+  border: 1px solid rgba(100, 150, 255, 0.1);
+  transition: all 0.3s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.law-item:hover {
+  background: rgba(40, 40, 70, 0.7);
+  transform: translateX(5px);
+}
+
+.law-icon {
+  font-size: 1.5rem;
+  min-width: 40px;
+  text-align: center;
+  color: #6a89cc;
+}
+
+.law-content h3 {
+  color: #e0e0ff;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.law-content p {
+  color: #b0c4de;
+  font-size: 0.9rem;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Channels Grid */
+.channels-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.channel-item {
+  display: flex;
+  gap: 1rem;
+  padding: 1.2rem;
+  background: rgba(20, 20, 35, 0.5);
+  border-radius: 8px;
+  border: 1px solid rgba(100, 150, 255, 0.1);
+  transition: all 0.3s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.channel-item:hover {
+  background: rgba(40, 40, 70, 0.7);
+  transform: translateY(-3px);
+}
+
+.channel-icon {
+  font-size: 1.8rem;
+  min-width: 50px;
+  text-align: center;
+  color: #6a89cc;
+}
+
+.channel-content h3 {
+  color: #e0e0ff;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.channel-content p {
+  color: #b0c4de;
+  font-size: 0.9rem;
+  margin: 0 0 0.8rem 0;
+  line-height: 1.4;
+}
+
+.channel-link {
+  color: #82ccdd;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border-bottom: 1px dotted #82ccdd;
+  transition: all 0.3s ease;
+}
+
+.channel-link:hover {
+  color: #a0d8e8;
+  border-bottom: 1px solid #a0d8e8;
+}
+
+/* Guidelines Grid */
+.guidelines-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.2rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.guideline-item {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  background: rgba(20, 20, 35, 0.5);
+  border-radius: 8px;
+  border: 1px solid rgba(100, 150, 255, 0.1);
+  transition: all 0.3s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.guideline-item:hover {
+  background: rgba(40, 40, 70, 0.7);
+  transform: translateX(-5px);
+}
+
+.guideline-icon {
+  font-size: 1.5rem;
+  min-width: 40px;
+  text-align: center;
+  color: #6a89cc;
+}
+
+.guideline-content h3 {
+  color: #e0e0ff;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.guideline-content p {
+  color: #b0c4de;
+  font-size: 0.9rem;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Principles Grid */
+.principles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.2rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.principle-item {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  background: rgba(20, 20, 35, 0.5);
+  border-radius: 8px;
+  border: 1px solid rgba(100, 150, 255, 0.1);
+  transition: all 0.3s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.principle-item:hover {
+  background: rgba(40, 40, 70, 0.7);
+  transform: translateX(5px);
+}
+
+.principle-icon {
+  font-size: 1.5rem;
+  min-width: 40px;
+  text-align: center;
+  color: #6a89cc;
+}
+
+.principle-content h3 {
+  color: #e0e0ff;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.principle-content p {
+  color: #b0c4de;
+  font-size: 0.9rem;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .cybersecurity-container {
+    padding: 1rem;
+  }
+  
+  .cybersecurity-header h1 {
+    font-size: 2rem;
+  }
+  
+  .content-section {
+    grid-template-columns: 1fr;
+  }
+  
+  .info-card {
+    padding: 1.5rem;
+  }
+  
+  .laws-grid, .channels-grid, .guidelines-grid, .principles-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .law-item, .channel-item, .guideline-item, .principle-item {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .law-icon, .channel-icon, .guideline-icon, .principle-icon {
+    margin: 0 auto;
+  }
+}

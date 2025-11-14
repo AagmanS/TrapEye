@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Trap Eye Chrome Extension</title>
+</head>
+<body>
+    <h1>Test Trap Eye Chrome Extension</h1>
+    <p>This is a test page with some links to verify the extension is working:</p>
+    
+    <ul>
+        <li><a href="https://google.com">Google (should be safe)</a></li>
+        <li><a href="https://github.com">GitHub (should be safe)</a></li>
+        <li><a href="http://paypal-secure-login-verify.com/signin/">Suspicious Link (should be flagged)</a></li>
+        <li><a href="https://stackoverflow.com">Stack Overflow (should be safe)</a></li>
+    </ul>
+    
+    <p>Instructions:</p>
+    <ol>
+        <li>Make sure the backend is running (python backend/main.py)</li>
+        <li>Reload the extension in Chrome (chrome://extensions/)</li>
+        <li>Open this page in Chrome</li>
+        <li>Click the Trap Eye extension icon to see the popup</li>
+        <li>Check if the analysis works correctly</li>
+    </ol>
+    
+    <p>Expected results:</p>
+    <ul>
+        <li>Google link should have a low risk score</li>
+        <li>GitHub link should have a low risk score</li>
+        <li>Suspicious link should have a high risk score</li>
+        <li>Stack Overflow link should have a low risk score</li>
+    </ul>
+</body>
+</html>

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>LinkLens sendMessage Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f0f2f5;
+        }
+        .header {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .test-section {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+        .log {
+            background: #000;
+            color: #00ff00;
+            padding: 15px;
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 14px;
+            height: 300px;
+            overflow-y: auto;
+            margin: 15px 0;
+        }
+        button {
+            background: #25D366;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            margin: 5px;
+        }
+        button:hover {
+            background: #128C7E;
+        }
+        button:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+        }
+        .status {
+            padding: 10px;
+            border-radius: 6px;
+            margin: 10px 0;
+        }
+        .success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🔗 LinkLens sendMessage Test</h1>
+        <p>This page tests the chrome.runtime.sendMessage functionality.</p>
+    </div>
+    
+    <div class="test-section">
+        <h2>sendMessage Tests</h2>
+        <button id="testBasicMessage" onclick="testBasicMessage()">Test Basic Message</button>
+        <button id="testScanUrl" onclick="testScanUrl()">Test Scan URL Message</button>
+        <button id="testWithCallback" onclick="testWithCallback()">Test Message with Callback</button>
+        <button id="testErrorHandling" onclick="testErrorHandling()">Test Error Handling</button>
+        <button id="clearLog" onclick="clearLog()">Clear Log</button>
+        
+        <div id="status" class="status" style="display: none;"></div>
+        
+        <div class="log" id="log">
+            Test log will appear here...
+        </div>
+    </div>
+    
+    <div class="test-section">
+        <h2>Test URLs</h2>
+        <p>These URLs can be used for testing:</p>
+        <ul>
+            <li>https://google.com (safe)</li>
+            <li>https://github.com (safe)</li>
+            <li>http://suspicious-site.com/login (risky)</li>
+            <li>http://fake-bank-login.com (risky)</li>
+        </ul>
+    </div>
+    
+    <script>
+        const logElement = document.getElementById('log');
+        const statusElement = document.getElementById('status');
+        
+        function log(message) {
+            const timestamp = new Date().toISOString();
+            const logEntry = `[${timestamp}] ${message}`;
+            logElement.innerHTML += logEntry + '\n';
+            logElement.scrollTop = logElement.scrollHeight;
+            console.log(logEntry);
+        }
+        
+        function showStatus(message, isSuccess) {
+            statusElement.textContent = message;
+            statusElement.className = 'status ' + (isSuccess ? 'success' : 'error');
+            statusElement.style.display = 'block';
+            
+            // Hide after 3 seconds
+            setTimeout(() => {
+                statusElement.style.display = 'none';
+            }, 3000);
+        }
+        
+        function clearLog() {
+            logElement.innerHTML = 'Test log will appear here...\n';
+        }
+        
+        function testBasicMessage() {
+            log('Testing basic message...');
+            
+            try {
+                chrome.runtime.sendMessage({
+                    action: 'testMessage',
+                    data: 'Hello from test page'
+                }, (response) => {
+                    if (chrome.runtime.lastError) {
+                        log('✗ Error: ' + chrome.runtime.lastError.message);
+                        showStatus('Basic message test failed: ' + chrome.runtime.lastError.message, false);
+                    } else {
+                        log('✓ Response received: ' + JSON.stringify(response));
+                        showStatus('Basic message test passed!', true);
+                    }
+                });
+            } catch (error) {
+                log('✗ Exception: ' + error.message);
+                showStatus('Basic message test failed: ' + error.message, false);
+            }
+        }
+        
+        function testScanUrl() {
+            log('Testing scan URL message...');
+            
+            try {
+                chrome.runtime.sendMessage({
+                    action: 'scanUrl',
+                    url: 'https://google.com'
+                }, (response) => {
+                    if (chrome.runtime.lastError) {
+                        log('✗ Error: ' + chrome.runtime.lastError.message);
+                        showStatus('Scan URL test failed: ' + chrome.runtime.lastError.message, false);
+                    } else {
+                        log('✓ Response received: ' + JSON.stringify(response));
+                        showStatus('Scan URL test passed!', true);
+                    }
+                });
+            } catch (error) {
+                log('✗ Exception: ' + error.message);
+                showStatus('Scan URL test failed: ' + error.message, false);
+            }
+        }
+        
+        function testWithCallback() {
+            log('Testing message with callback...');
+            
+            try {
+                chrome.runtime.sendMessage({
+                    action: 'testWithCallback',
+                    timestamp: Date.now()
+                }, (response) => {
+                    if (chrome.runtime.lastError) {
+                        log('✗ Callback error: ' + chrome.runtime.lastError.message);
+                        showStatus('Callback test failed: ' + chrome.runtime.lastError.message, false);
+                    } else {
+                        log('✓ Callback response: ' + JSON.stringify(response));
+                        showStatus('Callback test passed!', true);
+                    }
+                });
+            } catch (error) {
+                log('✗ Exception: ' + error.message);
+                showStatus('Callback test failed: ' + error.message, false);
+            }
+        }
+        
+        function testErrorHandling() {
+            log('Testing error handling...');
+            
+            // This will test error handling by sending an invalid message
+            try {
+                chrome.runtime.sendMessage(null, (response) => {
+                    if (chrome.runtime.lastError) {
+                        log('✓ Error properly caught: ' + chrome.runtime.lastError.message);
+                        showStatus('Error handling test passed!', true);
+                    } else {
+                        log('✗ Expected error but got response: ' + JSON.stringify(response));
+                        showStatus('Error handling test failed - expected error', false);
+                    }
+                });
+            } catch (error) {
+                log('✓ Exception caught: ' + error.message);
+                showStatus('Error handling test passed!', true);
+            }
+        }
+        
+        // Initialize
+        log('LinkLens sendMessage Test Page Loaded');
+        log('Ready to run tests...');
+        log('Make sure the LinkLens extension is loaded and enabled');
+    </script>
+</body>
+</html>
